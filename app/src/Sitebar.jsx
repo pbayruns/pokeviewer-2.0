@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { ROUTES } from './routes.js';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -11,35 +11,86 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import Drawer from '@material-ui/core/Drawer';
+
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+
 const styles = {
-    root: {
-      flexGrow: 1,
-    },
-    flex: {
-      flex: 1,
-    },
-    menuButton: {
-      marginLeft: -12,
-      marginRight: 20,
-    },
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  list: {
+    width: 250,
+  },
+};
+
+class Sitebar extends React.Component {
+
+  state = {
+    sidebar_open: false
   };
 
-function Sitebar(props) {
-    const { classes } = props;
+  toggleDrawer = (open) => {
+    this.setState({ sidebar_open: open });
+  }
+
+  render() {
+
+    const list = (
+      <React.Fragment>
+        <List style={styles.list} component="nav">
+          <ListItem component={Link} to={ROUTES.POKEMON_LIST.URL} button>
+            <ListItemText primary="Pokemon" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Moves" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Abilities" />
+          </ListItem>
+        </List>
+      </React.Fragment>
+    );
+
     return (
-      <div className={classes.root}>
+      <React.Fragment>
+        <Drawer open={this.state.sidebar_open} onClose={() => { this.toggleDrawer(false) }}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={() => { this.toggleDrawer(false) }}
+            onKeyDown={() => { this.toggleDrawer(false) }}
+          >
+            {list}
+          </div>
+        </Drawer>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <IconButton onClick={() => { this.toggleDrawer(true) }} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" className={classes.flex}>
+            <Typography variant="title" color="inherit">
               Pokeviewer
             </Typography>
           </Toolbar>
         </AppBar>
-      </div>
+      </React.Fragment>
     );
   }
+}
 
 export default withStyles(styles)(Sitebar);

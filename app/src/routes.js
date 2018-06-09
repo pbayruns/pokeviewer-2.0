@@ -1,7 +1,7 @@
 
 import LandingPage from './Pages/LandingPage';
 import NotFoundPage from './Pages/NotFoundPage';
-
+import PokemonListPage from './Pages/PokemonListPage';
 
 //Constants for pages to be used across any page that has routes or redirects
 export const ROUTES = {
@@ -9,6 +9,13 @@ export const ROUTES = {
         URL: '/',
         DISPLAY_NAME: 'Landing Page',
         COMPONENT: LandingPage,
+        IS_EXACT: true,
+        IS_NAV: false
+    },
+    POKEMON_LIST: {
+        URL: '/pokemon',
+        DISPLAY_NAME: 'Landing Page',
+        COMPONENT: PokemonListPage,
         IS_EXACT: true,
         IS_NAV: false
     },
