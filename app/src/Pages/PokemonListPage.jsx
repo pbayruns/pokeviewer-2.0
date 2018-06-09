@@ -35,6 +35,7 @@ export default class PokemonListPage extends React.Component {
         return (
             <React.Fragment>
                 <Sitebar />
+                <div class="pokemon-list-wrapper">
                 {
                     this.getPokemon().map(
                         (poke, i) => {
@@ -42,6 +43,8 @@ export default class PokemonListPage extends React.Component {
                       }
                     )
                 }
+                </div>
+
             </React.Fragment>
         );
     }

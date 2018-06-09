@@ -60,6 +60,9 @@ class Sitebar extends React.Component {
             <ListItemText primary="Moves" />
           </ListItem>
           <ListItem button>
+            <ListItemText primary="Types" />
+          </ListItem>
+          <ListItem button>
             <ListItemText primary="Abilities" />
           </ListItem>
         </List>
