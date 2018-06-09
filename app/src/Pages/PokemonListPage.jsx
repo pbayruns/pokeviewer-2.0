@@ -1,42 +1,34 @@
 import React from 'react';
 import Sitebar from '../Sitebar';
 import PokemonPreview from '../PokemonPreview';
-import Autocomplete from '../Autocomplete';
+import SearchCard from '../SearchCard';
+import axios from 'axios';
 
 export default class PokemonListPage extends React.Component {
 
-    getPokemon(){
-        const pokemon = {
-            id: 1,
-            order: 1,
-            identifier: "Bulbasaur",
-            types: [
-                {
-                    id: 1,
-                    identifier: "grass"
-                },
-                {
-                    id: 2,
-                    identifier: "poison"
-                }
-            ]
-        }
-        let array = [];
-        for(let i = 0; i < 900; i++){
-            array.push(pokemon);
-        }
-        return array;
+    state = {
+        loading: true,
+        pokemon: {}
+    };
+
+    componentDidMount(props){
+
+        axios.get('http://localhost:5000/pokemon/').then(
+            (response) => {
+                this.setState({loading: false, pokemon: response.data});
+            }
+        )
     }
 
     render(){
 
+        let { pokemon, loading } = this.state;
         return (
             <React.Fragment>
                 <Sitebar />
-                <Autocomplete/>
+                <SearchCard />
                 <div className="container">
-                {
-                    this.getPokemon().map(
+                { !loading && pokemon.map(
                         (poke, i) => {
                             return <PokemonPreview key={i} {...poke} />
                       }
