@@ -1,7 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../routes.js';
-import Button from '@material-ui/core/Button';
 import Sitebar from '../Sitebar';
 import PokemonPreview from '../PokemonPreview';
 
@@ -35,11 +32,11 @@ export default class PokemonListPage extends React.Component {
         return (
             <React.Fragment>
                 <Sitebar />
-                <div class="pokemon-list-wrapper">
+                <div className="container">
                 {
                     this.getPokemon().map(
                         (poke, i) => {
-                            return <PokemonPreview {...poke} />
+                            return <PokemonPreview key={i} {...poke} />
                       }
                     )
                 }

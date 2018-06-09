@@ -9,15 +9,12 @@ export default class NotFoundPage extends React.Component {
         return (
             <React.Fragment>
                 <Sitebar />
-
-                    <div className="row row-spaced justify-content-center text-center">
-                            <h1 className="no-select">404 - Page Not Found</h1>
-                    </div>
-                    <div className="row justify-content-center">
-                        <Link to={ROUTES.LANDING.URL}>
-                            <Button label="Back to home" primary={true} />
-                        </Link>
-                    </div>
+                <div className="row row-spaced justify-content-center text-center">
+                    <h1 className="no-select">404 - Page Not Found</h1>
+                </div>
+                <div className="row justify-content-center">
+                    <Button component={Link} to={ROUTES.LANDING.URL} label="Back to home" />
+                </div>
             </React.Fragment>
         );
     }
