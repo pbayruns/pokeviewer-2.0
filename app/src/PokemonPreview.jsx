@@ -11,10 +11,13 @@ export default class PokemonPreview extends React.Component {
         let { types, id, order, identifier } = this.props;
         return (
             <Paper className="pokemon-card">
-                <Link to={ROUTES.POKEMON_LIST.URL + id}>
-                    <img src={"https://s3.amazonaws.com/pokeviewer/pokemon/dream-world/" + id + ".svg"} alt={identifier} />
-                </Link>
-                {identifier} #{order}
+                <div className={"image-wrapper row type-" + types[0].identifier}>
+                    <Link to={ROUTES.POKEMON_LIST.URL + id}>
+                        <img src={"https://s3.amazonaws.com/pokeviewer/pokemon/dream-world/" + id + ".svg"} alt={identifier} />
+                    </Link>
+                </div>
+
+                <span className="name"> {identifier} #{order} </span>
                 {
                     types.map(
                         (type, i) => {

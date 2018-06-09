@@ -1,6 +1,7 @@
 import React from 'react';
 import Sitebar from '../Sitebar';
 import PokemonPreview from '../PokemonPreview';
+import Autocomplete from '../Autocomplete';
 
 export default class PokemonListPage extends React.Component {
 
@@ -21,7 +22,7 @@ export default class PokemonListPage extends React.Component {
             ]
         }
         let array = [];
-        for(let i = 0; i < 25; i++){
+        for(let i = 0; i < 900; i++){
             array.push(pokemon);
         }
         return array;
@@ -32,6 +33,7 @@ export default class PokemonListPage extends React.Component {
         return (
             <React.Fragment>
                 <Sitebar />
+                <Autocomplete/>
                 <div className="container">
                 {
                     this.getPokemon().map(
