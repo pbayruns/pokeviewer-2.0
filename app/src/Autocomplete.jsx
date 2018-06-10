@@ -7,73 +7,87 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-];
-
-function renderInput(inputProps) {
-  const { InputProps, ref, ...other } = inputProps;
-
-  return (
-    <TextField
-      InputProps={{
-        inputRef: ref,
-        ...InputProps,
-      }}
-      {...other}
-    />
-  );
-}
-
-function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItem }) {
-  const isHighlighted = highlightedIndex === index;
-  const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1;
-
-  return (
-    <MenuItem
-      {...itemProps}
-      key={suggestion.label}
-      selected={isHighlighted}
-      component="div"
-      style={{
-        fontWeight: isSelected ? 500 : 400,
-      }}
-    >
-      {suggestion.label}
-    </MenuItem>
-  );
-}
-renderSuggestion.propTypes = {
-  highlightedIndex: PropTypes.number,
-  index: PropTypes.number,
-  itemProps: PropTypes.object,
-  selectedItem: PropTypes.string,
-  suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired,
-};
-
-function getSuggestions(inputValue) {
-  let count = 0;
-
-  return suggestions.filter(suggestion => {
-    const keep =
-      (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
-      count < 5;
-
-    if (keep) {
-      count += 1;
-    }
-
-    return keep;
-  });
-}
 
 export default class Autocomplete extends React.Component {
   state = {
     inputValue: '',
-    selectedItem: [],
+    selectedItem: []
   };
+
+  renderInput(inputProps) {
+    const { InputProps, ref, ...other } = inputProps;
+
+    return (
+      <TextField
+        InputProps={{
+          inputRef: ref,
+          ...InputProps,
+        }}
+        {...other}
+      />
+    );
+  }
+
+  renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItem }) {
+    const isHighlighted = highlightedIndex === index;
+    const isSelected = (selectedItem || '').indexOf(suggestion.identifier) > -1;
+
+    return (
+      <MenuItem
+        className="pokemon-name"
+        {...itemProps}
+        key={suggestion.id}
+        selected={isHighlighted}
+        component="div"
+        style={{
+          fontWeight: isSelected ? 500 : 400,
+        }}
+      >
+        {suggestion.identifier}
+      </MenuItem>
+    );
+  }
+  // renderSuggestion.propTypes = {
+  //   highlightedIndex: PropTypes.number,
+  //   index: PropTypes.number,
+  //   itemProps: PropTypes.object,
+  //   selectedItem: PropTypes.string,
+  //   suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired,
+  // };
+
+  // Returns true if the given value contains the search term
+  valueContainsSearch(search, value){
+    return value.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  }
+
+  pokemonMatchesSearch(search, pokemon) {
+    // If the search text is empty, everything matches.
+    if(!search){ 
+      return true;
+    }
+    // Otherwise we have to search the pokemon for a match
+    let nameMatches = this.valueContainsSearch(search, pokemon.identifier);
+    let typeMatches = false;
+    for(let i = 0; i < pokemon.types.length; i++){
+      let type = pokemon.types[i].identifier
+      if(this.valueContainsSearch(search, type) || this.valueContainsSearch(type, search)){
+        typeMatches = true;
+      }
+    }
+    return (nameMatches || typeMatches);
+  }
+
+  getSuggestions(searchText) {
+    let suggestions_so_far = 0;
+    const suggestion_limit = 5;
+    return this.props.suggestions.filter(
+      pokemon => {
+        let isMatch = (suggestions_so_far < suggestion_limit) && this.pokemonMatchesSearch(searchText, pokemon);
+        if(isMatch) { suggestions_so_far++; }
+        return isMatch;
+      }
+    );
+  }
 
   handleKeyDown = event => {
     const { inputValue, selectedItem } = this.state;
@@ -122,7 +136,7 @@ export default class Autocomplete extends React.Component {
           highlightedIndex,
         }) => (
             <div>
-              {renderInput({
+              {this.renderInput({
                 fullWidth: true,
                 InputProps: getInputProps({
                   startAdornment: selectedItem.map(item => (
@@ -135,17 +149,17 @@ export default class Autocomplete extends React.Component {
                   )),
                   onChange: this.handleInputChange,
                   onKeyDown: this.handleKeyDown,
-                  placeholder: 'Select multiple countries',
+                  placeholder: 'Search anything',
                   id: 'integration-downshift-multiple',
                 }),
               })}
               {isOpen ? (
                 <Paper square>
-                  {getSuggestions(inputValue2).map((suggestion, index) =>
-                    renderSuggestion({
+                  {this.getSuggestions(inputValue2).map((suggestion, index) =>
+                    this.renderSuggestion({
                       suggestion,
                       index,
-                      itemProps: getItemProps({ item: suggestion.label }),
+                      itemProps: getItemProps({ item: suggestion.identifier }),
                       highlightedIndex,
                       selectedItem: selectedItem2,
                     }),

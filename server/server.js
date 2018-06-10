@@ -11,16 +11,17 @@ app.use(function(req, res, next) {
 
 //////// Mount All Routes //////////////
 var routes = [
-  require('./api/routes/pokemon.routes')
+  './api/routes/pokemon.routes',
+  './api/routes/types.routes',
 ]
 // Loop through all routes and register them with the app
 for (let i = 0; i < routes.length; i++) {
-  let route = routes[i];
+  let route = require(routes[i]);
   route(app);
 }
 
 /////Database Connection and Close////
-connect = () => {
+getDB = () => {
   const sqlite = require('sqlite');
   const dbPromise = sqlite.open('./db/veekun-pokedex.sqlite', { Promise });
   return dbPromise;
@@ -35,9 +36,22 @@ close = (db) => {
   });
 }
 
-app.connect = connect;
-app.close = close;
+connect = (requestFn) => {
+  try {
+    app.getDB().then(
+      (db) => {
+        requestFn(db);
+        app.close(db);
+      }
+    );
+  } catch (err) {
+    next(err);
+  }
+}
 
+app.getDB = getDB;
+app.close = close;
+app.connect = connect;
 // Start server
 app.listen(port);
 console.log('Pokeviewer API server started on port ' + port);

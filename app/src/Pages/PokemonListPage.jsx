@@ -1,39 +1,138 @@
 import React from 'react';
 import Sitebar from '../Sitebar';
 import PokemonPreview from '../PokemonPreview';
-import SearchCard from '../SearchCard';
+import Autocomplete from '../Autocomplete';
 import axios from 'axios';
+
+
+import { Paper, Button, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 
 export default class PokemonListPage extends React.Component {
 
     state = {
-        loading: true,
-        pokemon: {}
+        pokemonLoading: true,
+        pokemon: [],
+        typesLoading: true,
+        types: [],
+        display_types: []
     };
 
-    componentDidMount(props){
+    componentDidMount(props) {
 
+        axios.get('http://localhost:5000/types/').then(
+            (response) => {
+                let display_types = {};
+                for (let i = 0; i < response.data.length; i++) {
+                    let type = response.data[i];
+                    display_types[type.id] = true;
+                }
+                this.setState(
+                    {
+                        typesLoading: false,
+                        types: response.data,
+                        display_types: display_types
+                    });
+            }
+        )
         axios.get('http://localhost:5000/pokemon/').then(
             (response) => {
-                this.setState({loading: false, pokemon: response.data});
+                this.setState({ pokemonLoading: false, pokemon: response.data });
             }
         )
     }
 
-    render(){
+    checkChanged = id => event => {
+        const display_types = this.state.display_types;
+        display_types[id] = !display_types[id];
+        this.setState({ display_types });
+    };
 
-        let { pokemon, loading } = this.state;
+    renderCheckboxes() {
+        let { types, display_types, typesLoading } = this.state;
+
+        if (typesLoading) {
+            return "";
+        }
+
+        let chx = [];
+        for (let i = 0; i < types.length; i++) {
+            let type = types[i];
+            let checkbox = <Checkbox
+                key={type.id}
+                checked={display_types[type.id]}
+                onChange={this.checkChanged(type.id)}
+                value={type.identifer}
+            />;
+            let chkWithLabel = <FormControlLabel
+                label={type.identifier}
+                className={"type-label " + type.identifier}
+                key={type.id}
+                control={checkbox}
+            />;
+            chx.push(chkWithLabel);
+        }
+        return (
+            <FormGroup row>
+                {chx}
+            </FormGroup>
+        );
+    }
+
+    allChecked = () => {
+        let { display_types } = this.state;
+        for(var id in display_types){
+            if(!display_types[id]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    toggleAllChecked = () => {
+        // If they are all checked, we want to set them to the opposite
+        let targetCheck = !this.allChecked();
+        const display_types = this.state.display_types;
+        for(var id in display_types){
+            display_types[id] = targetCheck;
+        }
+        this.setState( { display_types });
+        console.log(this.state);
+    }
+
+    render() {
+        let { pokemon, pokemonLoading, typesLoading, types, display_types } = this.state;
+
         return (
             <React.Fragment>
                 <Sitebar />
-                <SearchCard />
+                <Paper elevation={4} className="pokemon-list-filter-card">
+                    {!pokemonLoading && !typesLoading && <Autocomplete suggestions={pokemon} />}
+                    <div className="container">
+                        <div className="checkboxes-container">
+                            Filter by Types
+                    {this.renderCheckboxes()}
+                            <Button color="primary" onClick={this.toggleAllChecked}>
+                                { this.allChecked() && "UNCHECK ALL" }
+                                { !this.allChecked() && "CHECK ALL" }
+
+                            </Button>
+                        </div>
+                    </div>
+                </Paper>
                 <div className="container">
-                { !loading && pokemon.map(
+                    {!pokemonLoading && pokemon.map(
                         (poke, i) => {
-                            return <PokemonPreview key={i} {...poke} />
-                      }
+                            let display = false;
+                            for (let i = 0; i < poke.types.length; i++) {
+                                let type_id = poke.types[i].id;
+                                if (display_types[type_id]) {
+                                    display = true;
+                                }
+                            }
+                            return display && <PokemonPreview key={i} {...poke} />
+                        }
                     )
-                }
+                    }
                 </div>
 
             </React.Fragment>
@@ -41,21 +140,3 @@ export default class PokemonListPage extends React.Component {
     }
 
 }
-
-// <div id="wrapper">
-// 	<div class="row justify-content-center">
-// 		<h1 id="pokemon-list-title">All Pokemon</h1>
-// 	</div>
-// 	<div class="row justify-content-center">
-// 			<button class="btn btn-default filter-button" data-filter="all">Clear Filters</button>
-// 			<br>			
-// 		{% for type in types %}
-// 		<button class="btn btn-default filter-button type-display type-{{type.identifier}}" data-filter="{{type.identifier}}">{{type.identifier | upper}}</button>
-// 		{% endfor %}
-// 	</div>
-// 	<div class="row justify-content-center">
-// 		{% for poke in pokemon %}
-
-// 		{% endfor %}
-// 		</div>
-// </div>
