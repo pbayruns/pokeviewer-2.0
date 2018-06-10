@@ -73,8 +73,9 @@ h1 {
         a {
             margin: auto;
             img{
+                max-width: 140px;
                 height: 100px;
-                padding: 10px 0px;
+                padding: 10px 5px;
             }
         }
     }
@@ -107,8 +108,8 @@ h1 {
 }
 
 $types: ( 
-    normal: (bg:#8a8a59, bg2: #a8a878, border: #79794e),
-    fire: (bg:#f08030, bg2: #f08030, border: #b4530d),
+    normal: (bg:#a8a878, bg2: #8a8a59, border: #79794e),
+    fire: (bg:#f08030, bg2: #dd6610, border: #b4530d),
     water: (bg:#6890f0, bg2: #386ceb, border: #1753e3),
     electric: (bg:#f8d030, bg2: #f0c108, border: #c19b07),
     grass: (bg:#78c850, bg2: #5ca935, border: #4a892b),
