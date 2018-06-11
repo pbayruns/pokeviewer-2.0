@@ -11,12 +11,15 @@ app.use(function(req, res, next) {
 
 //////// Mount All Routes //////////////
 var routes = [
-  './api/routes/pokemon.routes',
-  './api/routes/types.routes',
+  'pokemon',
+  'types',
+  'generations',
 ]
 // Loop through all routes and register them with the app
+const prefix = './api/routes/';
+const extension = '.routes';
 for (let i = 0; i < routes.length; i++) {
-  let route = require(routes[i]);
+  let route = require(prefix + routes[i] + extension);
   route(app);
 }
 

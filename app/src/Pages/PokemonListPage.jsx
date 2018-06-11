@@ -78,7 +78,7 @@ export default class PokemonListPage extends React.Component {
         );
     }
 
-    allChecked = () => {
+    allTypesChecked = () => {
         let { display_types } = this.state;
         for(var id in display_types){
             if(!display_types[id]){
@@ -88,15 +88,14 @@ export default class PokemonListPage extends React.Component {
         return true;
     }
 
-    toggleAllChecked = () => {
+    toggleAllTypesChecked = () => {
         // If they are all checked, we want to set them to the opposite
-        let targetCheck = !this.allChecked();
+        let targetCheck = !this.allTypesChecked();
         const display_types = this.state.display_types;
         for(var id in display_types){
             display_types[id] = targetCheck;
         }
         this.setState( { display_types });
-        console.log(this.state);
     }
 
     render() {
@@ -111,9 +110,9 @@ export default class PokemonListPage extends React.Component {
                         <div className="checkboxes-container">
                             Filter by Types
                     {this.renderCheckboxes()}
-                            <Button color="primary" onClick={this.toggleAllChecked}>
-                                { this.allChecked() && "UNCHECK ALL" }
-                                { !this.allChecked() && "CHECK ALL" }
+                            <Button color="primary" onClick={this.toggleAllTypesChecked}>
+                                { this.allTypesChecked() && "UNCHECK ALL" }
+                                { !this.allTypesChecked() && "CHECK ALL" }
 
                             </Button>
                         </div>
