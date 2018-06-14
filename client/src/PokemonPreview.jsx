@@ -11,7 +11,7 @@ export default class PokemonPreview extends React.Component {
         let { types, id, order, identifier } = this.props;
         return (
             <Paper className="pokemon-card">
-                <Link to={ROUTES.POKEMON_LIST.URL + id}>
+                <Link to={ROUTES.POKEMON_DETAIL.BASE_URL + id}>
                     <div className={"image-wrapper row type-" + types[0].identifier}>
                         <img src={"https://s3.amazonaws.com/pokeviewer/pokemon/" + id + ".png"} alt={identifier} />
                     </div>

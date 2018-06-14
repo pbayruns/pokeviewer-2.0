@@ -1,14 +1,19 @@
 'use strict';
 module.exports = function (app) {
 
-  //var pokemon = require('../controllers/pokemon.controller');
+  var typeCtrl = require('../controllers/types.controller');
 
 
   app.get('/types', async (req, res, next) => {
     app.connect(
       async (db) => {
-        const type_SQL = "SELECT t.* FROM types t;";
-        const types = await db.all(type_SQL);
+        var types = [];
+        var id = req.query.id;
+        if(id){
+          types = await typeCtrl.get(db, id);
+        }else{
+          types = await typeCtrl.getAll(db);
+        }
         res.json(types);
       }
     );

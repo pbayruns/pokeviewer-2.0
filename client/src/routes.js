@@ -2,7 +2,7 @@
 import LandingPage from './Pages/LandingPage';
 import NotFoundPage from './Pages/NotFoundPage';
 import PokemonListPage from './Pages/PokemonListPage';
-import PokemonDetailPage from './Pages/PokemonListPage';
+import PokemonDetailPage from './Pages/PokemonDetailPage';
 import TypeListPage from './Pages/TypeListPage';
 
 //Constants for pages to be used across any page that has routes or redirects
@@ -13,19 +13,28 @@ export const ROUTES = {
         COMPONENT: LandingPage,
         IS_EXACT: true,
         IS_NAV: false
+    },    
+    POKEMON_DETAIL: {
+        URL: '/pokemon/:id',
+        BASE_URL: '/pokemon/',
+        DISPLAY_NAME: 'Pokemon Detail',
+        COMPONENT: PokemonDetailPage,
+        IS_EXACT: false,
+        IS_NAV: false
     },
     POKEMON_LIST: {
-        URL: '/pokemon/',
+        URL: '/pokemon-list/',
         DISPLAY_NAME: 'Pokemon List',
         COMPONENT: PokemonListPage,
         IS_EXACT: true,
         IS_NAV: false
     },
-    POKEMON_DETAIL: {
-        URL: '/pokemon/:id',
-        DISPLAY_NAME: 'Pokemon Detail',
+    ABILITY_DETAIL: {
+        URL: '/ability/:id',
+        BASE_URL: '/ability/',
+        DISPLAY_NAME: 'Ability Detail',
         COMPONENT: PokemonDetailPage,
-        IS_EXACT: true,
+        IS_EXACT: false,
         IS_NAV: false
     },
     TYPES: {

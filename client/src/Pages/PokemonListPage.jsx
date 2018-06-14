@@ -14,11 +14,25 @@ export default class PokemonListPage extends React.Component {
         pokemon: [],
         typesLoading: true,
         types: [],
-        display_types: []
+        display_types: [],
+        checkbox_clicked: false
     };
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return (nextState.pokemon.length !== this.state.pokemon.length)
+            || (nextState.checkbox_clicked);
+    }
+
+    componentDidUpdate(prevProps) {
+        this.setState({
+            checkbox_clicked: false
+        });
+    }
+
 
     componentDidMount(props) {
 
+        let count = 0;
         axios.get('http://localhost:5000/types/').then(
             (response) => {
                 let display_types = {};
@@ -26,6 +40,7 @@ export default class PokemonListPage extends React.Component {
                     let type = response.data[i];
                     display_types[type.id] = true;
                 }
+                count++;
                 this.setState(
                     {
                         typesLoading: false,
@@ -36,6 +51,7 @@ export default class PokemonListPage extends React.Component {
         )
         axios.get('http://localhost:5000/pokemon/').then(
             (response) => {
+                count++;
                 this.setState({ pokemonLoading: false, pokemon: response.data });
             }
         )
@@ -44,7 +60,7 @@ export default class PokemonListPage extends React.Component {
     checkChanged = id => event => {
         const display_types = this.state.display_types;
         display_types[id] = !display_types[id];
-        this.setState({ display_types });
+        this.setState({ display_types, checkbox_clicked: true });
     };
 
     renderCheckboxes() {
@@ -80,8 +96,8 @@ export default class PokemonListPage extends React.Component {
 
     allTypesChecked = () => {
         let { display_types } = this.state;
-        for(var id in display_types){
-            if(!display_types[id]){
+        for (var id in display_types) {
+            if (!display_types[id]) {
                 return false;
             }
         }
@@ -92,10 +108,10 @@ export default class PokemonListPage extends React.Component {
         // If they are all checked, we want to set them to the opposite
         let targetCheck = !this.allTypesChecked();
         const display_types = this.state.display_types;
-        for(var id in display_types){
+        for (var id in display_types) {
             display_types[id] = targetCheck;
         }
-        this.setState( { display_types });
+        this.setState({ display_types });
     }
 
     render() {
@@ -105,18 +121,23 @@ export default class PokemonListPage extends React.Component {
             <React.Fragment>
                 <Sitebar />
                 <Paper elevation={4} className="pokemon-list-filter-card">
-                    {!pokemonLoading && !typesLoading && <Autocomplete suggestions={pokemon} />}
-                    <div className="container">
-                        <div className="checkboxes-container">
-                            Filter by Types
-                    {this.renderCheckboxes()}
-                            <Button color="primary" onClick={this.toggleAllTypesChecked}>
-                                { this.allTypesChecked() && "UNCHECK ALL" }
-                                { !this.allTypesChecked() && "CHECK ALL" }
+                    {!pokemonLoading && !typesLoading &&
+                        <React.Fragment>
+                            <Autocomplete suggestions={pokemon} />
+                            <div className="container">
+                                <div className="checkboxes-container">
+                                    Filter by Types
+                                {this.renderCheckboxes()}
+                                    <Button color="primary" onClick={this.toggleAllTypesChecked}>
+                                        {this.allTypesChecked() && "UNCHECK ALL"}
+                                        {!this.allTypesChecked() && "CHECK ALL"}
 
-                            </Button>
-                        </div>
-                    </div>
+                                    </Button>
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    }
+
                 </Paper>
                 <div className="container">
                     {!pokemonLoading && pokemon.map(
