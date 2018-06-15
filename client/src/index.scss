@@ -15,8 +15,7 @@ h2,
 h3,
 h4,
 h5,
-h6,
-h7 {
+h6{
     font-weight: 300;
 }
 
@@ -32,6 +31,28 @@ h1 {
 
 .text-center {
     text-align: center;
+}
+
+/*
+**************************************
+******CUSTOM SCROLLBAR****************
+**************************************
+*/
+
+*::-webkit-scrollbar-track
+{
+	background: #FFF;
+}
+
+*::-webkit-scrollbar
+{
+    width: 15px;
+    background: #FFF;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	background-color: #C1C1C1;
 }
 
 /*
@@ -77,10 +98,7 @@ h1 {
     margin-right: 5px;
     padding: 0px;
     padding-bottom: 10px;
-    width: 150px; // font-family: "Fira Sans", "Trebuchet MS", "Tahoma", "Ubuntu", "Helvetica", "Arial", sans-serif;
-    // cursor: pointer;
-    // font-size: 10px;
-    // color: #FFF;
+    width: 150px;
     text-transform: capitalize;
     text-decoration-color: #FFF; // text-shadow: rgb(51, 51, 51) 2px 2px 2px;
     text-align: center;

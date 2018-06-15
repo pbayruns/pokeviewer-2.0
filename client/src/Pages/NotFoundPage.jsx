@@ -4,6 +4,8 @@ import routes from 'routes';
 import Button from '@material-ui/core/Button';
 import Sitebar from 'Sitebar';
 
+import { Row } from 'layout';
+
 export default class NotFoundPage extends React.Component {
     render() {
         return (

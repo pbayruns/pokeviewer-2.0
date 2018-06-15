@@ -4,6 +4,8 @@ import routes from 'routes';
 import Paper from '@material-ui/core/Paper';
 import TypeIcon from 'TypeIcon';
 
+import { Row } from 'layout';
+
 export default class PokemonPreview extends React.Component {
 
     render() {
@@ -12,7 +14,7 @@ export default class PokemonPreview extends React.Component {
         return (
             <Paper className="pokemon-card">
                 <Link to={routes.POKEMON_DETAIL.BASE_URL + id}>
-                    <Row className={"image-wrapper row type-" + types[0].identifier}>
+                    <Row className={"image-wrapper type-" + types[0].identifier}>
                         <img src={"https://s3.amazonaws.com/pokeviewer/pokemon/" + id + ".png"} alt={identifier} />
                     </Row>
                 </Link>
