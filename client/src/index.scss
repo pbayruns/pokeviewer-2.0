@@ -91,8 +91,13 @@ h1 {
     padding: 15px 15px;
     .checkboxes-container {}
 }
-
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 .pokemon-card {
+ 
+    animation: fadein 2s;
     margin-top: 10px;
     margin-left: 5px;
     margin-right: 5px;

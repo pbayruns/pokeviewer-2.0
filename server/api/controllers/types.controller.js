@@ -15,7 +15,7 @@ async function get(db, id) {
 }
 
 async function getByPoke(db, poke_id) {
-    let type_SQL = "SELECT t.id, t.identifier, t.generation_id FROM pokemon_types pt " +
+    let type_SQL = "SELECT t.id, t.identifier FROM pokemon_types pt " +
         "JOIN types t ON (pt.type_id = t.id) " +
         "WHERE pt.pokemon_id = " + poke_id;
     return db.all(type_SQL);
