@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+@import '_vars.scss';
+
 body {
     margin: 0;
     padding: 0;
@@ -121,27 +123,7 @@ h1 {
     text-shadow: rgb(51, 51, 51) 1px 1px 1px;
 }
 
-$types: ( 
-    normal: (bg:#a8a878, bg2: #8a8a59, border: #79794e),
-    fire: (bg:#f08030, bg2: #dd6610, border: #b4530d),
-    water: (bg:#6890f0,bg2: #386ceb,border: #1753e3),
-    electric: (bg:#f8d030,bg2: #f0c108,border: #c19b07),
-    grass: (bg:#78c850,bg2: #5ca935,border: #4a892b),
-    ice: (bg:#98d8d8,bg2: #69c6c6,border: #45b6b6),
-    fighting: (bg:#c03028,bg2: #9d2721,border: #82211b),
-    poison: (bg:#a040a0,bg2: #803380,border: #662966),
-    ground: (bg:#d4a82f,bg2: #8a8a59,border: #aa8623),
-    flying: (bg:#a890f0,bg2: #9180c4,border: #7762b6),
-    psychic: (bg:#f85888,bg2: #f61c5d,border: #ba083d),
-    bug: (bg:#a8b820,bg2: #8d9a1b,border: #616b13),
-    rock: (bg:#b8a038,bg2: #93802d,border: #746523),
-    ghost: (bg:#705898,bg2: #554374,border: #413359),
-    dragon: (bg:#7038f8,bg2: #4c08ef,border: #3d07c0),
-    steel: (bg:#b8b8d0,bg2: #9797ba,border: #7a7aa7),
-    dark: (bg:#705848,bg2: #513f34,border: #362a23),
-    fairy: (bg:#e898e8,bg2: #de6ede,border: #d547d5),
-    curse: (bg:#68a090,bg2: #4e7c6f,border: #41685d),
-);
+
 @each $type,
 $colors in $types {
     .type-#{$type} {

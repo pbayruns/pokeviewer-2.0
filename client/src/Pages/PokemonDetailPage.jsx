@@ -5,6 +5,8 @@ import API from 'util/apicall.js';
 import TypeIcon from 'TypeIcon';
 import AbilityDisplay from 'AbilityDisplay';
 
+import { Row, Container } from 'layout';
+
 export default class PokemonDetailPage extends React.Component {
 
     API = new API();
@@ -35,8 +37,8 @@ export default class PokemonDetailPage extends React.Component {
             <React.Fragment>
                 <Sitebar />
                 {pokemonLoaded &&
-                    <div className="container">
-                        <div className="row">
+                    <Container>
+                        <Row>
                             <div className="image-cropper">
                                 <img src={"https://s3.amazonaws.com/pokeviewer/pokemon/" + poke.id + ".png"} alt={poke.identifier} />
                             </div>
@@ -48,8 +50,8 @@ export default class PokemonDetailPage extends React.Component {
                                     }
                                 )
                             }
-                        </div>
-                        <div className="row">
+                        </Row>
+                        <Row>
                             { poke.abilities &&
                                 poke.abilities.map(
                                     (ability, i) => {
@@ -59,9 +61,9 @@ export default class PokemonDetailPage extends React.Component {
                                     }
                                 )
                             }
-                        </div>
+                        </Row>
 
-                    </div>
+                    </Container>
                 }
             </React.Fragment>
         );

@@ -4,6 +4,7 @@ import PokemonPreview from '../PokemonPreview';
 import Autocomplete from '../Autocomplete';
 import axios from 'axios';
 
+import { Container } from 'layout';
 
 import { Paper, Button, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 
@@ -124,7 +125,7 @@ export default class PokemonListPage extends React.Component {
                     {!pokemonLoading && !typesLoading &&
                         <React.Fragment>
                             <Autocomplete suggestions={pokemon} />
-                            <div className="container">
+                            <Container>
                                 <div className="checkboxes-container">
                                     Filter by Types
                                 {this.renderCheckboxes()}
@@ -134,12 +135,12 @@ export default class PokemonListPage extends React.Component {
 
                                     </Button>
                                 </div>
-                            </div>
+                            </Container>
                         </React.Fragment>
                     }
 
                 </Paper>
-                <div className="container">
+                <Container>
                     {!pokemonLoading && pokemon.map(
                         (poke, i) => {
                             let display = false;
@@ -153,7 +154,7 @@ export default class PokemonListPage extends React.Component {
                         }
                     )
                     }
-                </div>
+                </Container>
 
             </React.Fragment>
         );
