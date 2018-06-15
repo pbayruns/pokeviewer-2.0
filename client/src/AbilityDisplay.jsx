@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ROUTES } from './routes';
+import routes from 'routes';
 
 
 export default function AbilityDisplay(props) {
     let { ability } = props;
     return (
         <li class="list-group-item justify-content-between">
-            <Link to={ROUTES.ABILITY_DETAIL.BASE_URL + ability.id}>
+            <Link to={routes.ABILITY_DETAIL.BASE_URL + ability.id}>
                 {ability.identifier}
             </Link>
             {

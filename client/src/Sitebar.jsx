@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from './routes.js';
+import routes from 'routes';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -48,7 +48,7 @@ class Sitebar extends React.Component {
     const list = (
       <React.Fragment>
         <List style={styles.list} component="nav">
-          <ListItem component={Link} to={ROUTES.POKEMON_LIST.URL} button>
+          <ListItem component={Link} to={routes.POKEMON_LIST.URL} button>
             <ListItemText primary="Pokemon" />
           </ListItem>
           <ListItem button>

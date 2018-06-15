@@ -1,5 +1,5 @@
 import React from 'react';
-import Sitebar from '../Sitebar';
+import Sitebar from 'Sitebar';
 
 export default function LandingPage(props) {
 

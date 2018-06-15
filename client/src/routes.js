@@ -1,12 +1,7 @@
-
-import LandingPage from './Pages/LandingPage';
-import NotFoundPage from './Pages/NotFoundPage';
-import PokemonListPage from './Pages/PokemonListPage';
-import PokemonDetailPage from './Pages/PokemonDetailPage';
-import TypeListPage from './Pages/TypeListPage';
+import { LandingPage, NotFoundPage, PokemonListPage, PokemonDetailPage, TypeListPage } from 'pages';
 
 //Constants for pages to be used across any page that has routes or redirects
-export const ROUTES = {
+const ROUTES = {
     LANDING: {
         URL: '/',
         DISPLAY_NAME: 'Landing Page',
@@ -52,3 +47,5 @@ export const ROUTES = {
         IS_NAV: false
     }
 }
+
+export default ROUTES;
