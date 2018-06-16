@@ -69,6 +69,7 @@ h1 {
 }
 
 .row {
+    width: 100%;
     display: flex;
     flex-grow: 1;
     flex-direction: row;
@@ -146,6 +147,9 @@ h1 {
     text-shadow: rgb(51, 51, 51) 1px 1px 1px;
 }
 
+.type-label {
+    text-transform: capitalize;
+}
 
 @each $type,
 $colors in $types {
@@ -155,12 +159,29 @@ $colors in $types {
         #{map-get($colors, bg2)});
         border-color: #{map-get($colors, border)};
     }
-    .type-label {
-        text-transform: capitalize;
-    }
     .type-label.#{$type} {
         span {
             color: #{map-get($colors, bg)};
+        }
+    }
+}
+
+/**********************************
+************TYPE DISPLAYS**********
+***********************************
+*/
+
+.stat-bar{
+    height: 20px  !important;
+    width: 100%;
+}
+
+@each $stat,
+$colors in $stats {
+    .stat-bar.stat-#{$stat} {
+        background: #{map-get($colors, bg)} !important;
+        div{
+            background: #{map-get($colors, fill)};
         }
     }
 }

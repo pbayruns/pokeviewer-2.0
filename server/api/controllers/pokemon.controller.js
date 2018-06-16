@@ -2,6 +2,7 @@
 
 var genCtrl = require('../controllers/generations.controller');
 var typeCtrl = require('../controllers/types.controller');
+var statCtrl = require('../controllers/stats.controller');
 
 // For each pokemon, we have the generation id. We want to turn that into a generation object.
 // We can either
@@ -12,7 +13,7 @@ async function getAll(db) {
   const poke_SQL = "SELECT p.id, p.identifier, ps.generation_id, pdn.pokedex_number AS 'order' " +
   "FROM pokemon p JOIN pokemon_species ps ON (p.species_id = ps.id)  " +
   "JOIN pokemon_dex_numbers pdn ON (pdn.species_id = ps.id)  " +
-  "WHERE pdn.pokedex_id = 1  " +
+  "WHERE pdn.pokedex_id = 1 AND p.is_default = 1 " +
   "ORDER BY 'order'";
   var pokemon = await db.all(poke_SQL);
   pokemon = await addDetails(db, pokemon);
@@ -20,9 +21,11 @@ async function getAll(db) {
 }
 
 async function get(db, id) {
-  var poke_SQL = "SELECT p.*, ps.* FROM pokemon p " +
-    "JOIN pokemon_species ps ON (p.species_id = ps.id) " +
-    " WHERE p.id = " + id;
+  var poke_SQL = "SELECT p.id, p.identifier, ps.generation_id, pdn.pokedex_number AS 'order' " +
+  "FROM pokemon p JOIN pokemon_species ps ON (p.species_id = ps.id)  " +
+  "JOIN pokemon_dex_numbers pdn ON (pdn.species_id = ps.id)  " +
+  "WHERE pdn.pokedex_id = 1 " +
+  "AND p.id = " + id;
   var pokemon = await db.all(poke_SQL);
   pokemon = await addDetails(db, pokemon);
   return pokemon;
@@ -32,6 +35,7 @@ async function addDetails(db, pokemon) {
   for (let i = 0; i < pokemon.length; i++) {
     let poke = pokemon[i];
     poke.types = await typeCtrl.getByPoke(db, poke.id);
+    poke.stats = await statCtrl.getByPoke(db, poke.id);
     //poke.generation = await genCtrl.get(db, poke.generation_id);
   }
   return pokemon;

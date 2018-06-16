@@ -19,3 +19,14 @@ $types: (
     fairy: (bg:#e898e8,bg2: #de6ede,border: #d547d5),
     curse: (bg:#68a090,bg2: #4e7c6f,border: #41685d),
 );
+
+$stats: (
+    hp: (fill: #FF0000, bg: #FF5959),
+    attack: (fill: #F08030, bg: #F5AC78),
+    defense: (fill: #F8D030, bg: #FAE078),
+    special-attack: (fill: #6890F0, bg: #9DB7F5),
+    special-defense: (fill: #78C850, bg: #A7DB8D),
+    speed: (fill: #F85888, bg: #FA92B2),
+    accuracy: (fill: #000, bg: #FFF),
+    evasion: (fill: #000, bg: #FFF)
+)

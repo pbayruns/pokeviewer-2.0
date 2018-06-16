@@ -25,8 +25,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.49",
-    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.51",
     "npm-run-all": "^4.1.3"
   }
 }
