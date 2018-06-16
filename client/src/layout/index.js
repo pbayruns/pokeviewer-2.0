@@ -7,8 +7,13 @@ const Container = (props) => {
 }
 
 const Row = (props) => {
+    const { centered, wrap } = props;
+    let classes = "row ";
+    classes += (centered ? "centered " : "");
+    classes += (wrap ? "wrap " : "");
+
     return (
-        <div className="row" {...props}>{props.children}</div>
+        <div className={classes} {...props}>{props.children}</div>
     );
 }
 

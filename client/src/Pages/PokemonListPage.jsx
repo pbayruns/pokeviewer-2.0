@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Container } from 'layout';
+import { Row } from 'layout';
 import Sitebar from 'Sitebar';
 import PokemonList from 'PokemonList';
 import PokemonListFilterCard from 'PokemonListFilterCard';
@@ -76,9 +76,9 @@ export default class PokemonListPage extends React.Component {
                     display_types={display_types} 
                     types={types}
                     checkChanged={this.checkChanged}/>
-                <Container>
+                <Row wrap>
                         <PokemonList loading={pokemonLoading} pokemon={pokemon} display_types={display_types} />
-                </Container>
+                </Row>
             </React.Fragment>
         );
     }

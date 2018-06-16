@@ -4,9 +4,10 @@ import API from 'util/apicall.js';
 
 import TypeIcon from 'TypeIcon';
 import AbilityDisplay from 'AbilityDisplay';
+import StatsDisplay from 'StatsDisplay';
 
-import { Row, Container } from 'layout';
-import { LinearProgress, Paper } from '@material-ui/core';
+import { Row, Col } from 'layout';
+import { Paper } from '@material-ui/core';
 
 export default class PokemonDetailPage extends React.Component {
 
@@ -39,21 +40,44 @@ export default class PokemonDetailPage extends React.Component {
                 <Sitebar />
                 {pokemonLoaded &&
                     <React.Fragment>
-                        <Row>
-                            <Paper depth={4}>
-                                <div className="image-cropper">
-                                    <img src={"https://s3.amazonaws.com/pokeviewer/pokemon/" + poke.id + ".png"} alt={poke.identifier} />
-                                </div>
+                        <Row centered>
+                            <Col>
+                                <img className="pokemon-image" src={"https://s3.amazonaws.com/pokeviewer/pokemon/" + poke.id + ".png"} alt={poke.identifier} />
                                 <span className="name"> {poke.identifier} <br /> #{poke.order} </span>
-                                {
-                                    poke.types.map(
-                                        (type, i) => {
-                                            return <TypeIcon key={i} type={type} />;
-                                        }
-                                    )
-                                }
-                            </Paper>
-
+                                <div>
+                                    {poke.types.map((type, i) => { return <TypeIcon key={i} type={type} /> })}
+                                </div>
+                            </Col>
+                            <Col>
+                                <Table>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell numeric>{n.calories}</TableCell>
+                                            <TableCell numeric>{n.fat}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell numeric>{n.calories}</TableCell>
+                                            <TableCell numeric>{n.fat}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell numeric>{n.calories}</TableCell>
+                                            <TableCell numeric>{n.fat}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell numeric>{n.calories}</TableCell>
+                                            <TableCell numeric>{n.fat}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell numeric>{n.calories}</TableCell>
+                                            <TableCell numeric>{n.fat}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell numeric>{n.calories}</TableCell>
+                                            <TableCell numeric>{n.fat}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </Col>
                         </Row>
                         <Row>
                             {poke.abilities &&
@@ -66,12 +90,10 @@ export default class PokemonDetailPage extends React.Component {
                                 )
                             }
                         </Row>
-                        {
-                            poke.stats &&
-                            poke.stats.map((stat, i) => {
-                                return (<Row>{stat.identifier}<LinearProgress className={"stat-bar stat-" + stat.identifier} variant="determinate" value={(stat.base_stat / 150) * 100} /></Row>);
-                            })
-                        }
+                        <Row centered>
+                            {poke.stats && <StatsDisplay stats={poke.stats} />}
+                        </Row>
+
                     </React.Fragment>
                 }
             </React.Fragment>

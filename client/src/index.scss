@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
 @import '_vars.scss';
-
 body {
     margin: 0;
     padding: 0;
@@ -15,7 +14,7 @@ h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
     font-weight: 300;
 }
 
@@ -39,20 +38,17 @@ h1 {
 **************************************
 */
 
-*::-webkit-scrollbar-track
-{
-	background: #FFF;
+*::-webkit-scrollbar-track {
+    background: #FFF;
 }
 
-*::-webkit-scrollbar
-{
+*::-webkit-scrollbar {
     width: 15px;
     background: #FFF;
 }
 
-*::-webkit-scrollbar-thumb
-{
-	background-color: #C1C1C1;
+*::-webkit-scrollbar-thumb {
+    background-color: #C1C1C1;
 }
 
 /*
@@ -69,10 +65,18 @@ h1 {
 }
 
 .row {
-    width: 100%;
     display: flex;
-    flex-grow: 1;
     flex-direction: row;
+}
+.row.centered {
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
 }
 
 /*
@@ -92,12 +96,17 @@ h1 {
     padding: 15px 15px;
     .checkboxes-container {}
 }
+
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
+
 .pokemon-card {
- 
     animation: fadein 2s;
     margin-top: 10px;
     margin-left: 5px;
@@ -126,6 +135,9 @@ h1 {
     text-transform: capitalize;
 }
 
+.pokemon-image{
+    
+}
 /**********************************
 ************TYPE DISPLAYS**********
 ***********************************
@@ -167,12 +179,20 @@ $colors in $types {
 }
 
 /**********************************
-************TYPE DISPLAYS**********
+************STAT DISPLAYS**********
 ***********************************
 */
 
-.stat-bar{
-    height: 20px  !important;
+.stat-table {
+    max-width: 700px;
+}
+
+.bar-col {
+    min-width: 150px !important;
+}
+
+.stat-bar {
+    height: 20px !important;
     width: 100%;
 }
 
@@ -180,7 +200,7 @@ $colors in $types {
 $colors in $stats {
     .stat-bar.stat-#{$stat} {
         background: #{map-get($colors, bg)} !important;
-        div{
+        div {
             background: #{map-get($colors, fill)};
         }
     }
