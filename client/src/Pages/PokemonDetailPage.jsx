@@ -5,9 +5,15 @@ import API from 'util/apicall.js';
 import TypeIcon from 'TypeIcon';
 import AbilityDisplay from 'AbilityDisplay';
 import StatsDisplay from 'StatsDisplay';
+import EvolutionDisplay from 'EvolutionDisplay';
+import PokeImage from 'PokeImage';
 
+import {
+    Table, TableBody, TableCell, TableHead, TablePagination,
+    TableRow, TableSortLabel, Toolbar, Typography, Paper,
+    Checkbox, IconButton, Tooltip, LinearProgress
+} from '@material-ui/core';
 import { Row, Col } from 'layout';
-import { Paper } from '@material-ui/core';
 
 export default class PokemonDetailPage extends React.Component {
 
@@ -42,39 +48,34 @@ export default class PokemonDetailPage extends React.Component {
                     <React.Fragment>
                         <Row centered>
                             <Col>
-                                <img className="pokemon-image" src={"https://s3.amazonaws.com/pokeviewer/pokemon/" + poke.id + ".png"} alt={poke.identifier} />
+                                <PokeImage id={poke.id} identifier={poke.identifier} />
                                 <span className="name"> {poke.identifier} <br /> #{poke.order} </span>
-                                <div>
-                                    {poke.types.map((type, i) => { return <TypeIcon key={i} type={type} /> })}
-                                </div>
                             </Col>
                             <Col>
                                 <Table>
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
+                                            <TableCell>Type</TableCell>
+                                            <TableCell>
+                                                {poke.types.map((type, i) => { return <TypeIcon key={i} type={type} /> })}
+                                            </TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
+                                            <TableCell>Height</TableCell>
+                                            <TableCell numeric>{poke.height/10}m</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
+                                            <TableCell>Weight</TableCell>
+                                            <TableCell numeric>{poke.weight/10}kg</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
+                                            <TableCell>Base Exp.</TableCell>
+                                            <TableCell numeric>{poke.base_experience}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
-                                        </TableRow>
+                                            <TableCell>Base Happiness</TableCell>
+                                            <TableCell numeric>{poke.base_happiness}</TableCell>
+                                        </TableRow>                                                                                                                                                                                                                                                                                                                                                       
                                     </TableBody>
                                 </Table>
                             </Col>
@@ -94,6 +95,9 @@ export default class PokemonDetailPage extends React.Component {
                             {poke.stats && <StatsDisplay stats={poke.stats} />}
                         </Row>
 
+                        <Row centered>
+                        { poke.evolutions && <EvolutionDisplay evolutions={poke.evolutions} /> }
+                        </Row>
                     </React.Fragment>
                 }
             </React.Fragment>
