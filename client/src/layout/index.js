@@ -7,19 +7,23 @@ const Container = (props) => {
 }
 
 const Row = (props) => {
-    const { centered, wrap } = props;
-    let classes = "row ";
+    const { centered, wrap, className } = props;
+    let classes = className + " row ";
     classes += (centered ? "centered " : "");
     classes += (wrap ? "wrap " : "");
 
     return (
-        <div className={classes} {...props}>{props.children}</div>
+        <div  {...props} className={classes}>{props.children}</div>
     );
 }
 
 const Col = (props) => {
+    const { centered, wrap, className } = props;
+    let classes = className + " col ";
+    classes += (centered ? "centered " : "");
+    classes += (wrap ? "wrap " : "");
     return (
-        <div className="col" {...props}>{props.children}</div>
+        <div  {...props} className={classes}>{props.children}</div>
     );
 }
 

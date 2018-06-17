@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import routes from 'routes';
 import Paper from '@material-ui/core/Paper';
-import TypeIcon from 'TypeIcon';
+
+
 import PokeImage from 'PokeImage';
+import TypesDisplay from 'TypesDisplay';
 
 import { Row } from 'layout';
 
@@ -11,7 +13,7 @@ export default class PokemonPreview extends React.Component {
 
     render() {
 
-        let { types, id, order, identifier } = this.props;
+        let { types, id, pokedex_number, identifier } = this.props;
         return (
             <Paper className="pokemon-card">
                 <Link to={routes.POKEMON_DETAIL.BASE_URL + id}>
@@ -20,14 +22,8 @@ export default class PokemonPreview extends React.Component {
                     </Row>
                 </Link>
 
-                    <span className="name"> {identifier} <br /> #{order} </span>
-                    {
-                        types.map(
-                            (type, i) => {
-                                return <TypeIcon key={i} type={type} />;
-                            }
-                        )
-                    }
+                    <span className="name"> {identifier} <br /> #{pokedex_number} </span>
+                    <TypesDisplay centered types={types} />
             </Paper>
                 );
             }

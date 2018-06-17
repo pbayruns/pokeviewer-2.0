@@ -2,7 +2,7 @@ import React from 'react';
 import Sitebar from 'Sitebar';
 import API from 'util/apicall.js';
 
-import TypeIcon from 'TypeIcon';
+import TypesDisplay from 'TypesDisplay';
 import AbilityDisplay from 'AbilityDisplay';
 import StatsDisplay from 'StatsDisplay';
 import EvolutionDisplay from 'EvolutionDisplay';
@@ -57,16 +57,16 @@ export default class PokemonDetailPage extends React.Component {
                                         <TableRow>
                                             <TableCell>Type</TableCell>
                                             <TableCell>
-                                                {poke.types.map((type, i) => { return <TypeIcon key={i} type={type} /> })}
+                                                <TypesDisplay types={poke.types} />
                                             </TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell>Height</TableCell>
-                                            <TableCell numeric>{poke.height/10}m</TableCell>
+                                            <TableCell numeric>{poke.height / 10}m</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell>Weight</TableCell>
-                                            <TableCell numeric>{poke.weight/10}kg</TableCell>
+                                            <TableCell numeric>{poke.weight / 10}kg</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell>Base Exp.</TableCell>
@@ -75,7 +75,7 @@ export default class PokemonDetailPage extends React.Component {
                                         <TableRow>
                                             <TableCell>Base Happiness</TableCell>
                                             <TableCell numeric>{poke.base_happiness}</TableCell>
-                                        </TableRow>                                                                                                                                                                                                                                                                                                                                                       
+                                        </TableRow>
                                     </TableBody>
                                 </Table>
                             </Col>
@@ -96,7 +96,7 @@ export default class PokemonDetailPage extends React.Component {
                         </Row>
 
                         <Row centered>
-                        { poke.evolutions && <EvolutionDisplay evolutions={poke.evolutions} /> }
+                            {poke.evolutions && <EvolutionDisplay evolutions={poke.evolutions} />}
                         </Row>
                     </React.Fragment>
                 }
