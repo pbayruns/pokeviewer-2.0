@@ -1,6 +1,6 @@
 import React from 'react';
 import PokeImage from 'PokeImage';
-import { KeyboardArrowRightIcon } from '@material-ui/icons';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 const EvolutionDisplay = (props) => {
     const { evolutions } = props;
@@ -8,8 +8,12 @@ const EvolutionDisplay = (props) => {
         (evolution, i) => {
             return (
                 <div>
-                    <KeyboardArrowRightIcon/>
-                    {evolution.evolution_method}
+                    {evolution.id &&
+                        <React.Fragment>
+                            <KeyboardArrowRightIcon />
+                            {evolution.evolution_method}
+                        </React.Fragment>
+                    }
                     <PokeImage key={i} id={evolution.species_id} identifier={evolution.species_identifier} />
                 </div>
             );

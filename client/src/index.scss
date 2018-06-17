@@ -131,12 +131,17 @@ h1 {
     }
 }
 
+.name{
+    text-transform: capitalize;
+}
+
 .pokemon-name {
     text-transform: capitalize;
 }
 
 .pokemon-image{
-    
+    max-height: 300px;
+    max-width: 300px;
 }
 /**********************************
 ************TYPE DISPLAYS**********

@@ -48,7 +48,7 @@ export default class PokemonDetailPage extends React.Component {
                     <React.Fragment>
                         <Row centered>
                             <Col>
-                                <PokeImage id={poke.id} identifier={poke.identifier} />
+                                <PokeImage sugimori id={poke.id} identifier={poke.identifier} />
                                 <span className="name"> {poke.identifier} <br /> #{poke.order} </span>
                             </Col>
                             <Col>
