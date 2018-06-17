@@ -4,10 +4,9 @@
 import React from 'react';
 import TypesDisplay from 'TypesDisplay';
 import {
-    Table, TableBody, TableCell, TableHead, TablePagination,
-    TableRow, TableSortLabel, Toolbar, Typography, Paper,
-    Checkbox, IconButton, Tooltip, LinearProgress
+    Table, TableBody, TableCell, TableRow, List
 } from '@material-ui/core';
+import AbilityDisplay from './AbilityDisplay';
 
 export default function PokeInfoTable(props) {
     let { poke } = props;
@@ -19,6 +18,20 @@ export default function PokeInfoTable(props) {
                     <TableCell>Type</TableCell>
                     <TableCell>
                         <TypesDisplay types={poke.types} />
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>Abilities</TableCell>
+                    <TableCell >
+                        {
+                            poke.abilities.map(
+                                (ability, i) =>
+                                    <React.Fragment>
+                                        <AbilityDisplay key={i} ability={ability} />
+                                        <br/>
+                                    </React.Fragment>
+                            )
+                        }
                     </TableCell>
                 </TableRow>
                 <TableRow>

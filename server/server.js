@@ -14,6 +14,7 @@ var routes = [
   'pokemon',
   'types',
   'generations',
+  'abilities'
 ]
 // Loop through all routes and register them with the app
 const prefix = './api/routes/';

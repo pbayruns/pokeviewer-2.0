@@ -9,6 +9,7 @@ export default class API {
   pokemon = {};
   types = {};
   generations = {};
+  abilities = {};
 
   constructor(){
     
@@ -20,6 +21,9 @@ export default class API {
     
     this.generations.get = (id) => {return this.getResource('generations/', id)};
     this.generations.getAll = () => {return this.getResource('generations/')};
+
+    this.abilities.get = (id) => {return this.getResource('abilities/', id)};
+    this.abilities.getAll = () => {return this.getResource('abilities/')};
   }
 
   getResource = (endpoint, id = undefined) => {

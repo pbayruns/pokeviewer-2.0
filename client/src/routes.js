@@ -1,4 +1,8 @@
-import { LandingPage, NotFoundPage, PokemonListPage, PokemonDetailPage, TypeListPage } from 'pages';
+import { LandingPage, NotFoundPage, 
+    PokemonListPage, PokemonDetailPage, 
+    TypeListPage,
+    AbilityDetailPage
+} from 'pages';
 
 //Constants for pages to be used across any page that has routes or redirects
 const ROUTES = {
@@ -28,7 +32,7 @@ const ROUTES = {
         URL: '/ability/:id',
         BASE_URL: '/ability/',
         DISPLAY_NAME: 'Ability Detail',
-        COMPONENT: PokemonDetailPage,
+        COMPONENT: AbilityDetailPage,
         IS_EXACT: false,
         IS_NAV: false
     },

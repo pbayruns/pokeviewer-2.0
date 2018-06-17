@@ -3,6 +3,7 @@
 var genCtrl = require('../controllers/generations.controller');
 var typeCtrl = require('../controllers/types.controller');
 var statCtrl = require('../controllers/stats.controller');
+var abilCtrl = require('../controllers/abilities.controller');
 
 // For each pokemon, we have the generation id. We want to turn that into a generation object.
 // We can either
@@ -40,10 +41,13 @@ async function addDetails(db, pokemon) {
     let poke = pokemon[i];
     poke.types = await typeCtrl.getByPoke(db, poke.id);
     poke.stats = await statCtrl.getByPoke(db, poke.id);
+    poke.abilities = await abilCtrl.getByPoke(db, poke.species_id);
     poke.evolutions = await getEvos(db, poke.species_id);
   }
   return pokemon;
 }
+
+
 
 async function getEvos(db, species_id) {
   console.log("getEvos start");

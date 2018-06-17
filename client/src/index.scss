@@ -22,6 +22,10 @@ h1 {
     font-size: 3em;
 }
 
+a{
+    text-decoration: none;
+    color: #2196F3;
+}
 .no-select {
     pointer-events: none;
     -webkit-touch-callout: none;
@@ -30,6 +34,16 @@ h1 {
 
 .text-center {
     text-align: center;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+.uppercase{
+    text-transform: uppercase;
+}
+.bold{
+    font-weight: 500;
 }
 
 /*
