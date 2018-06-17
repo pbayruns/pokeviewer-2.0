@@ -68,7 +68,9 @@ h1 {
     display: flex;
     flex-direction: row;
 }
-
+.row.bottom{
+    margin-bottom: 100px;
+}
 
 .col {
     display: flex;
@@ -77,6 +79,10 @@ h1 {
 .row.centered, .col.centered {
     justify-content: center;
     align-items: center;
+}
+
+.row.padded, .col.padded{
+    padding: 15px;
 }
 
 /*
@@ -130,6 +136,9 @@ h1 {
         display: block;
     }
 }
+.pokemon-card.highlight{
+    box-shadow: 0px 0px 15px 5px rgba(97,176,255,1);
+}
 
 .name{
     text-transform: capitalize;
@@ -140,8 +149,12 @@ h1 {
 }
 
 .pokemon-image{
-    max-height: 300px;
-    max-width: 300px;
+    max-height: 250px;
+    max-width: 250px;
+}
+
+.detail-image{
+    margin-right: 25px;
 }
 
 .evo-col{
@@ -149,6 +162,7 @@ h1 {
     padding-right: 30px;
     text-align: center;
 }
+
 /**********************************
 ************TYPE DISPLAYS**********
 ***********************************

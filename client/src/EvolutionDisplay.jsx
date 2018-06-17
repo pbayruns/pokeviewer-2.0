@@ -5,11 +5,11 @@ import PokemonPreview from 'PokemonPreview';
 import EvolutionMethodDisplay from 'EvolutionMethodDisplay';
 
 const EvolutionDisplay = (props) => {
-    const { evolutions } = props;
+    const { evolutions, currentID } = props;
     return (
         <Col>
             <Row>
-                <h1>Evolutions</h1>
+                <h2>Evolutions</h2>
             </Row>
             <Row>
                 {
@@ -21,7 +21,12 @@ const EvolutionDisplay = (props) => {
                                         {evolution.id && <EvolutionMethodDisplay evolution={evolution} />}
                                     </Col>
                                     <Col className="evo-col">
-                                        <PokemonPreview pokedex_number={evolution.pokedex_number} types={evolution.types} identifier={evolution.species_identifier} id={evolution.species_id} />
+                                        <PokemonPreview
+                                            highlight={evolution.species_id == currentID}
+                                            pokedex_number={evolution.pokedex_number}
+                                            types={evolution.types}
+                                            identifier={evolution.species_identifier}
+                                            id={evolution.species_id} />
                                     </Col>
                                 </React.Fragment>
                             );
