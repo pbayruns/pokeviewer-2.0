@@ -48,7 +48,14 @@ export default class PokemonDetailPage extends React.Component {
         return (
             <React.Fragment key={this.props.match.params.id}>
                 <Sitebar />
-                Ability Page
+                <Row centered>
+                    <h1 className="capitalize">{ability.identifier}</h1>
+                </Row>
+                <Row centered>
+                    <p>
+                        {ability.effect}
+                    </p>
+                </Row>
                 {JSON.stringify(ability)}
             </React.Fragment>
         );
